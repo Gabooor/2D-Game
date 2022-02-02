@@ -62,7 +62,7 @@ public class Shop : MonoBehaviour
         PotionHealingText = GameObject.Find("PotionHealingText").GetComponent<Text>();
         PotionHealingText.text = "Healing: " + shopInventory.itemList[2].GetHealing().ToString();
         PotionPriceText = GameObject.Find("PotionPriceText").GetComponent<Text>();
-        PotionPriceText.text = "Price: " + shopInventory.itemList[2].GetPrice(1).ToString();
+        PotionPriceText.text = "Price: " + shopInventory.itemList[2].GetPrice().ToString();
     }
 
     public void UpgradeStaff()
@@ -111,6 +111,19 @@ public class Shop : MonoBehaviour
                 Player.money -= swordUnlockPrice;
                 Player.moneyText.text = Player.money.ToString();
                 //Player.equippedItem = Player.inventory.itemList[Player.selectedSlotValue];
+            }
+        }
+    }
+
+    public void PurchaseHealthPotion()
+    {
+        if(Player.potionInventory.itemList.Count < 9)
+        {
+            if (Player.money >= shopInventory.itemList[2].GetPrice())
+            {
+                Player.potionInventory.AddItem(new Item { itemType = Item.ItemType.HealthPotion });
+                Player.money -= shopInventory.itemList[2].GetPrice();
+                Player.moneyText.text = Player.money.ToString();
             }
         }
     }

@@ -102,6 +102,15 @@ public class Item
         }
     }
 
+    public int GetPrice()
+    {
+        switch (itemType)
+        {
+            default:
+            case ItemType.HealthPotion: return 50;
+        }
+    }
+
     public int GetPrice(int level)
     {
         switch (itemType)

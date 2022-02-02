@@ -213,7 +213,7 @@ public class Player : MonoBehaviour
         //USING ITEMS
         if (Input.GetKeyDown("c"))
         {
-            if(potionInventory.itemList.Count > 1)
+            if (potionInventory.itemList.Count >= 1)
             {
                 Heal(50);
                 potionInventory.DeleteItemByIndex(potionInventory.itemList.Count - 1);
