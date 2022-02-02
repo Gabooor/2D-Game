@@ -1,0 +1,65 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - Enemy
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - Bullet
+  - Enemy
+  - EnemyUI
+  - Player
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: Background
+    uniqueID: 2961484757
+    locked: 0
+  - name: Secondary Background
+    uniqueID: 3824451111
+    locked: 0
+  - name: Enemy
+    uniqueID: 3639248127
+    locked: 0
+  - name: Bullet
+    uniqueID: 230236421
+    locked: 0
+  - name: Player
+    uniqueID: 4068350113
+    locked: 0
+  - name: Healthbar
+    uniqueID: 2677989541
+    locked: 0
+  - name: Nokika
+    uniqueID: 3168388089
+    locked: 0
