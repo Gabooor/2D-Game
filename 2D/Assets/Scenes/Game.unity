@@ -266,7 +266,7 @@ MonoBehaviour:
   warriorBoss: {fileID: 3559152728238910046, guid: 377ba9b2136766f4197233a8cc52bc45, type: 3}
   tank: {fileID: 6777663484530048268, guid: 7aa2c439750916143bc73b42f3db6bdc, type: 3}
   tankBoss: {fileID: 7418578777770874400, guid: dadada52eb073904e875b541c3a9a105, type: 3}
-  mage: {fileID: 7905536891492531949, guid: f94c2dead775c824d83a442d9d62273e, type: 3}
+  mage: {fileID: 6046702003154125956, guid: 76ee23737c6e2284f96936d0ee852989, type: 3}
   mageBoss: {fileID: 3781842364157430328, guid: 8264e104ee572784fa426426b343665d, type: 3}
   player: {fileID: 166472154}
 --- !u!4 &69006685
