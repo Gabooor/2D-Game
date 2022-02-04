@@ -27,6 +27,15 @@ public class Shop : MonoBehaviour
     private Text PotionHealingText;
     private Text PotionPriceText;
 
+    public Transform Container;
+    private Transform itemPanelTemplate;
+
+    public void Awake()
+    {
+        Container = transform.Find("ShopPanel");
+        itemPanelTemplate = Container.Find("ItemPanelTemplate");
+    }
+
     // Start is called before the first frame update
     void Start()
     {

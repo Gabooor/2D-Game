@@ -143,8 +143,9 @@ public class Player : MonoBehaviour
 
         ItemWorld.SpawnItemWorld(new Vector2(-2, 0), new Item { itemType = Item.ItemType.HealthPotion });
 
-        for (int i = 0; i < 11; i++)
+        for (int i = 0; i < Upgrade.names.Length; i++)
         {
+            Upgrade upgrade = new Upgrade(Upgrade.names[i]);
             //ItemWorld.SpawnItemWorld(new Vector2(i* 2, 0), new Item { itemType = Item.ItemType.HealthPotion });
             //Debug.Log(i + ".: " + Mathf.Round(0.02f * (Mathf.Pow(i + 1, 3)) + 0.04f * (Mathf.Pow(i + 1, 2)) + i + 1));
         }
