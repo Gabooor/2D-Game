@@ -6,7 +6,8 @@ public class Bullet : MonoBehaviour
 {
     protected float timer = 0;
     //protected float aliveTime = 1.5f;
-    public static float damage = 1;
+    private int penetration = 0;
+    public static int maxPenetration = 0;
 
     // Update is called once per frame
     void FixedUpdate()
@@ -26,10 +27,17 @@ public class Bullet : MonoBehaviour
             switch (Player.equippedItem.GetName())
             {
                 default:
-                case "Sword": enemy.takeDamage(Player.equippedItem.GetDamage(Player.swordLevel)); break;
-                case "Staff": enemy.takeDamage(Player.equippedItem.GetDamage(Player.staffLevel)); break;
+                case "Sword": enemy.takeDamage(Player.equippedItem.GetDamage(Player.swordLevel) + Player.damageBonus); break;
+                case "Staff": enemy.takeDamage(Player.equippedItem.GetDamage(Player.staffLevel) + Player.damageBonus); break;
             }
-            Destroy(gameObject);
+            if(penetration < maxPenetration)
+            {
+                penetration++;
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
         }
     }
 }

@@ -85,7 +85,7 @@ public class Item
         switch (itemType)
         {
             default:
-            case ItemType.Staff: return (int)Mathf.Round(0.01f * (Mathf.Pow(level + 1, 3)) + 0.02f * (Mathf.Pow(level + 1, 2)) + level + 1);
+            case ItemType.Staff: return (int)Mathf.Round(0.01f * (Mathf.Pow(level + 1, 3)) + 0.02f * (Mathf.Pow(level + 1, 2)) + level);
             case ItemType.Sword: return (int)Mathf.Round(0.02f * (Mathf.Pow(level + 1, 3)) + 0.04f * (Mathf.Pow(level + 1, 2)) + level + 20);
         }
     }

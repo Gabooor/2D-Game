@@ -6,7 +6,6 @@ public class PlayerMovement : MonoBehaviour
 {
     public Rigidbody2D rb;
     public Transform characterSprite;
-    private float moveSpeed = 3f;
     Vector2 movement;
     public Animator anim;
 
@@ -67,6 +66,6 @@ public class PlayerMovement : MonoBehaviour
     void FixedUpdate()
     {
         movement.Normalize();
-        rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
+        rb.MovePosition(rb.position + movement * Player.moveSpeed * Time.fixedDeltaTime);
     }
 }

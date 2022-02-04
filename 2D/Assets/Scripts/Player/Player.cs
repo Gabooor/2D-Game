@@ -18,6 +18,8 @@ public class Player : MonoBehaviour
     //MP VARIABLES
     public static float mana;
     private float maxmana = 100;
+    public static float manaRegen;
+    public static Text manaRegenText;
     public Image manaBar;
     public static RectTransform rtManaBar;
     private float mpwidth;
@@ -26,6 +28,12 @@ public class Player : MonoBehaviour
     private float abilityTimer;
 
     //GENERAL VARIABLES
+    public static float moveSpeed;
+    public static Text speedText;
+    public static int damageBonus;
+    public static Text damageBonusText;
+    public static float fireRate;
+    public static Text fireRateText;
     public static int enemiesKilled;
     public static int money;
     public static Text moneyText;
@@ -62,6 +70,7 @@ public class Player : MonoBehaviour
     //VARIABLES FOR ENEMY DETECTING
     public static List<GameObject> enemies;
     public Transform coin;
+
 
     // Start is called before the first frame update
     void Start()
@@ -119,9 +128,25 @@ public class Player : MonoBehaviour
         staffLevel = 1;
         swordLevel = 0;
 
-        for(int i = 0; i < 150; i++)
+        moveSpeed = 3f;
+        speedText = GameObject.Find("SpeedText").GetComponent<Text>();
+        speedText.text = moveSpeed.ToString();
+        damageBonus = 0;
+        damageBonusText = GameObject.Find("DamageText").GetComponent<Text>();
+        damageBonusText.text = "+" + damageBonus.ToString();
+        fireRate = 1f;
+        fireRateText = GameObject.Find("FireRateText").GetComponent<Text>();
+        fireRateText.text = fireRate.ToString() + "x";
+        manaRegen = 5;
+        manaRegenText = GameObject.Find("ManaRegenerationText").GetComponent<Text>();
+        manaRegenText.text = manaRegen.ToString() + "/s";
+
+        ItemWorld.SpawnItemWorld(new Vector2(-2, 0), new Item { itemType = Item.ItemType.HealthPotion });
+
+        for (int i = 0; i < 11; i++)
         {
-            Debug.Log(i + ".: " + Mathf.Round(0.02f * (Mathf.Pow(i + 1, 3)) + 0.04f * (Mathf.Pow(i + 1, 2)) + i + 1));
+            //ItemWorld.SpawnItemWorld(new Vector2(i* 2, 0), new Item { itemType = Item.ItemType.HealthPotion });
+            //Debug.Log(i + ".: " + Mathf.Round(0.02f * (Mathf.Pow(i + 1, 3)) + 0.04f * (Mathf.Pow(i + 1, 2)) + i + 1));
         }
     }
 
@@ -186,7 +211,7 @@ public class Player : MonoBehaviour
                 Shoot();
                 if (!isAbilityActive)
                 {
-                    shootingCooldown = originalShootingCooldown;
+                    shootingCooldown = originalShootingCooldown / fireRate;
                 }
                 else
                 {
@@ -211,16 +236,19 @@ public class Player : MonoBehaviour
         if (shootingCooldown < 0) shootingCooldown = 0;
 
         //USING ITEMS
-        if (Input.GetKeyDown("c"))
+        if(health < maxhealth)
         {
-            if (potionInventory.itemList.Count >= 1)
+            if (Input.GetKeyDown("c"))
             {
-                Heal(50);
-                potionInventory.DeleteItemByIndex(potionInventory.itemList.Count - 1);
-            }
-            else
-            {
-                Debug.Log("You don't have any potions");
+                if (potionInventory.itemList.Count >= 1)
+                {
+                    Heal(50);
+                    potionInventory.DeleteItemByIndex(potionInventory.itemList.Count - 1);
+                }
+                else
+                {
+                    Debug.Log("You don't have any potions");
+                }
             }
         }
 
@@ -252,11 +280,12 @@ public class Player : MonoBehaviour
         }
         if(mana < 100)
         {
-            mana += 5 * Time.deltaTime;
+            mana += manaRegen * Time.deltaTime;
             mpwidth = mana / maxmana * 100;
             rtManaBar.sizeDelta = new Vector2(mpwidth, mpheight);
         }
         if (mana > 100) mana = 100;
+
     }
 
     //ITEM PICKUP
@@ -271,7 +300,7 @@ public class Player : MonoBehaviour
                 {
                     potionInventory.AddItem(itemWorld.GetItem());
                     itemWorld.DestroySelf();
-                    Debug.Log(potionInventory.itemList.Count);
+                    //Debug.Log(potionInventory.itemList.Count);
                 }
             }
             else if(inventory.itemList.Count < 4)
@@ -332,6 +361,27 @@ public class Player : MonoBehaviour
             xpText.text = xp.ToString() + "/" + xpNeeded.ToString();
             rtXpBar.sizeDelta = new Vector2(210 * ((float)xp / xpNeeded), rtXpBar.sizeDelta.y);
             rtXpBar.localPosition = new Vector2((105 - (rtXpBar.sizeDelta.x / 2)) * -1, rtXpBar.localPosition.y);
+            float random = Random.Range(0f, 1f);
+            if (random <= 0.25f)
+            {
+                moveSpeed = Mathf.Round((moveSpeed + 0.1f) * 100f) / 100f;
+                speedText.text = moveSpeed.ToString();
+            }
+            else if(random > 0.25f && random <= 0.5f)
+            {
+                damageBonus += 1;
+                damageBonusText.text = damageBonus.ToString();
+            }
+            else if(random > 0.5f && random <= 0.75f)
+            {
+                fireRate = Mathf.Round((fireRate + 0.05f) * 100f) / 100f;
+                fireRateText.text = fireRate.ToString();
+            }
+            else
+            {
+                manaRegen += 0.5f;
+                manaRegenText.text = manaRegen.ToString();
+            }
         }
         else
         {
