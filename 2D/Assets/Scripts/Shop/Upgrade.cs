@@ -6,7 +6,7 @@ public class Upgrade
 {
     private string Name;
 
-    public static string[] names = { "UpgradeStaff", "UpgradeSword", "PurchaseHealthPotion" };
+    public static string[] names = { "UpgradeStaff", "UpgradeSword", "PurchaseHealthPotion", "UpgradeStaff", "UpgradeSword", "PurchaseHealthPotion" };
     public static string[] descriptions = { 
         "The Staff is a long range weapon, that deals small amount of damage.",
         "The Sword is a short range weapon, that deals a huge amount of damage in return of its short range.",
@@ -23,6 +23,22 @@ public class Upgrade
     public Upgrade(string nName)
     {
         this.Name = nName;
-        Debug.Log(this.Name);
+        //Debug.Log(this.Name);
+    }
+
+    public string GetName()
+    {
+        return this.Name;
+    }
+
+    public Sprite GetSprite(string name)
+    {
+        switch (name)
+        {
+            default:
+            case "UpgradeStaff": return ItemAssets.Instance.staffSprite;
+            case "UpgradeSword": return ItemAssets.Instance.swordSprite;
+            case "PurchaseHealthPotion": return ItemAssets.Instance.healthPotionSprite;
+        }
     }
 }

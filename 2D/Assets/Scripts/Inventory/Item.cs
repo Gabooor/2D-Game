@@ -90,8 +90,6 @@ public class Item
         }
     }
 
-
-
     public float GetAliveTime()
     {
         switch (itemType)
